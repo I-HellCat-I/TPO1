@@ -32,18 +32,25 @@ public class LabFunctions {
         return taylor_series_sin_with_precision(x, Math.pow(10, -9));
     }
 
-    public static <T extends Comparable<T>> void bubble_sort(List<T> list){
+    public static <T extends Comparable<T>> boolean bubble_sort(List<T> list){
         // For the love of god, pls less than 10^5 elements
         T temp;
         for (int i = 0; i < list.size()-1; i++){
             for (int j = 0; j < list.size()-1; j++){
                 if (list.get(j).compareTo(list.get(j+1)) > 0) {
-                    temp = list.get(j);
-                    list.set(j, list.get(j+1));
-                    list.set(j+1, temp);
+                    try {
+                        temp = list.get(j);
+                        list.set(j, list.get(j+1));
+                        list.set(j+1, temp);
+                    } catch (UnsupportedOperationException | ClassCastException | IllegalArgumentException e) {
+                        return false;
+                    } catch (NullPointerException e) {
+                        throw e;
+                    }
                 }
             }
         }
+        return true;
     }
 
 
