@@ -6,6 +6,6 @@ import java.util.ArrayList;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        System.out.println(-4 % (2*Math.PI));
+        System.out.println(LabFunctions.taylor_series_sin(Math.PI/2));
     }
 }

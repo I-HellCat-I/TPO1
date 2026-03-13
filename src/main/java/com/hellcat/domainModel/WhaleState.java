@@ -1,13 +1,11 @@
 package com.hellcat.domainModel;
 
-public enum Entities {
-    Entity,
-    Whale,
-    Dog,
-    Food,
-    Fish,
-    Censored
+public enum WhaleState {
+    CONFUSED, // Не осознаёт
+    AWARE_WHALE, // Осознаёт
+    DEAD // Больше не кит
 }
+
 
 
 
