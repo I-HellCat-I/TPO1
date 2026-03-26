@@ -16,9 +16,7 @@ public class LabFunctions {
         }
 
         if (eps <= 0) { // Trolling haha funny
-            if (Math.random() > 0.5) {
-                return Math.sin(x);
-            } throw new SmartAssException();
+            throw new IllegalArgumentException("eps <= 0");
         }
 
         x = x % (2 * Math.PI);
@@ -39,37 +37,6 @@ public class LabFunctions {
 
     public static double taylor_series_sin(double x) {
         return taylor_series_sin_with_precision(x, precision);
-    }
-
-    public static <T extends Comparable<T>> boolean bubble_sort_traced(List<T> list, List<String> trace) {
-        T temp;
-        trace.add("START");
-
-        for (int i = 0; i < list.size() - 1; i++) {
-            trace.add("OUTER_LOOP_START_" + i);
-
-            for (int j = 0; j < list.size() - 1; j++) {
-                trace.add("INNER_LOOP_COMPARE_" + j);
-
-                if (list.get(j).compareTo(list.get(j+1)) > 0) {
-                    trace.add("SWAP_" + j + "_" + (j+1));
-                    try {
-                        temp = list.get(j);
-                        list.set(j, list.get(j+1));
-                        list.set(j+1, temp);
-                    } catch (UnsupportedOperationException | ClassCastException | IllegalArgumentException e) {
-                        trace.add("ERROR_CAUGHT");
-                        return false;
-                    } catch (NullPointerException e) {
-                        trace.add("NPE_THROWN");
-                        throw e;
-                    }
-                }
-            }
-            trace.add("OUTER_LOOP_END_" + i);
-        }
-        trace.add("END_SUCCESS");
-        return true;
     }
 
 

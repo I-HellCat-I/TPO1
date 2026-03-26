@@ -44,7 +44,6 @@ import lombok.Setter;
 @Getter
 public class Whale {
     private WhaleState state;
-    private boolean isHappy;
     private double timeToLive;
     private double totalTimeSpent;
     @Setter
@@ -55,7 +54,6 @@ public class Whale {
         totalTimeSpent = 0.0;
         state = WhaleState.CONFUSED;
         environment = Environment.AIR;
-        isHappy = false;
         timeToLive = initialTime;
         this.IQ = 100;
     }
@@ -73,7 +71,9 @@ public class Whale {
     public void tryToRealizeIdentity(double timeSpent) {
         if (state == WhaleState.DEAD) return;
 
-        timeToLive -= timeSpent;
+        if (!environment.isNaturalForWhale()) {
+            timeToLive -= timeSpent;
+        }
         totalTimeSpent += timeSpent;
 
         if (timeToLive <= 0) {
@@ -82,9 +82,13 @@ public class Whale {
         }
 
         if (!environment.isNaturalForWhale()) {
-            if (timeToLive > 0 && totalTimeSpent * IQ > 100) {
+            if (totalTimeSpent * IQ > 100) {
                 this.state = WhaleState.AWARE_WHALE;
+                return;
             }
+        }
+        if (totalTimeSpent * IQ > 10) {
+            this.state = WhaleState.AWARE_WHALE;
         }
     }
 

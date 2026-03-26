@@ -11,7 +11,6 @@ class WhaleModelTest {
     void testWhaleCreation_UnhappyAndConfused() {
         whale = new Whale(10.0);
 
-        assertFalse(whale.isHappy(), "Кит должен быть несчастным по условию задачи.");
         assertEquals(WhaleState.CONFUSED, whale.getState(), "Изначально кит не понимает, кто он.");
         assertEquals(10.0, whale.getTimeToLive());
     }
@@ -67,5 +66,26 @@ class WhaleModelTest {
         whale.tryToRealizeIdentity( 9.0);
 
         assertEquals(WhaleState.CONFUSED, whale.getState(), "Глупый кит не быстро поймёт кто он.");
+    }
+
+    @Test
+    void testWhaleInTheOcean() {
+        whale = new Whale(10.0);
+        whale.setEnvironment(Environment.OCEAN);
+
+        whale.tryToRealizeIdentity(10.0);
+
+        assertEquals(WhaleState.AWARE_WHALE, whale.getState(), "В океане кит живёт и может себя осознать.");
+    }
+
+
+    @Test
+    void testDumbWhaleInTheOcean() {
+        whale = new Whale(1.0, 9);
+        whale.setEnvironment(Environment.OCEAN);
+
+        whale.tryToRealizeIdentity(1.0);
+
+        assertEquals(WhaleState.CONFUSED, whale.getState(), "Глупый кит может себя не осознать не сразу даже в океане.");
     }
 }
